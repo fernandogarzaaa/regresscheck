@@ -1,0 +1,20 @@
+# regresscheck settings. Every threshold can be overridden by an environment variable
+# (REGRESSCHECK_WARN_THRESHOLD, REGRESSCHECK_CRITICAL_THRESHOLD, ...). See README "Thresholds".
+[regresscheck]
+dataset = "golden/dataset.json"
+prompts_dir = "prompts"
+active_prompt = "prompts/v2.yaml"
+db_path = ".regresscheck/history.db"
+baseline_dir = "baselines"
+report_dir = "reports"
+concurrency = 8
+track = "default"
+
+[regresscheck.thresholds]
+warn = 0.03              # accuracy drop (absolute) that triggers a warning
+critical = 0.08          # accuracy drop that fails CI
+summary_warn = 0.03      # mean judge-score drop, as a fraction of the 1-5 scale
+summary_critical = 0.08
+category_warn = 0.10     # any one category losing more than this is a warning
+drift_window = 7         # runs in the moving average
+drift_max_drop = 0.03    # moving average this far below its peak = slow drift

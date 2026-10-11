@@ -1,0 +1,10 @@
+# Settings for the real-model runs recorded in results/groq/ (Groq free tier, OpenAI-compatible).
+[regresscheck]
+dataset = "golden/dataset.json"
+prompts_dir = "prompts"
+active_prompt = "prompts/v2.yaml"
+db_path = "results/groq/history.db"
+baseline_dir = "results/groq/baselines"
+report_dir = "results/groq/reports"
+concurrency = 2
+track = "groq-demo"

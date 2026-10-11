@@ -1,0 +1,183 @@
+"""Reproducible demo: real runs of the pipeline with the deterministic mock provider.
+
+1. v1 -> v2 -> v3-bad, each checked against the previous run (per-run regression detection).
+2. Slow drift: seven stable v2 runs, then a chain of small prompt "cleanups" that each lose
+   one golden case. No single run trips the 3% warn threshold; the 7-run moving average does.
+
+Writes demo/out/ (SQLite history, HTML reports, PR-comment Markdown) and demo/RESULTS.md.
+Run: python scripts/run_demo.py
+"""
+
+from __future__ import annotations
+
+import contextlib
+import io
+import json
+import os
+import re
+import shutil
+import sqlite3
+import tempfile
+from pathlib import Path
+
+import yaml
+
+from regresscheck.cli import main
+
+ROOT = Path(__file__).resolve().parent.parent
+OUT = ROOT / "demo" / "out"
+DRIFT_DIR = ROOT / "demo" / "prompts" / "drift"
+CONFIG = Path(tempfile.gettempdir()) / "regresscheck-demo.toml"
+
+# Each removal is a plausible "trim the prompt" edit that costs exactly one golden case.
+DRIFT_REMOVALS = [
+    ("billing", "discounts"),
+    ("technical", "notifications"),
+    ("general", "careers"),
+    ("technical", "audio"),
+    ("account", "profile"),
+    ("technical", "API"),
+    ("technical", "search"),
+]
+
+
+def write_config(track: str) -> None:
+    CONFIG.write_text(
+        "[regresscheck]\n"
+        'dataset = "golden/dataset.json"\n'
+        'prompts_dir = "prompts"\n'
+        'active_prompt = "prompts/v2.yaml"\n'
+        'db_path = "demo/out/history.db"\n'
+        'report_dir = "demo/out/reports"\n'
+        f'track = "{track}"\n'
+    )
+
+
+def cli(*args: str) -> tuple[int, str]:
+    buf = io.StringIO()
+    with contextlib.redirect_stdout(buf):
+        code = main(["--config", str(CONFIG), *args])
+    return code, buf.getvalue()
+
+
+def build_drift_prompts() -> list[Path]:
+    v2 = yaml.safe_load((ROOT / "prompts" / "v2.yaml").read_text())
+    DRIFT_DIR.mkdir(parents=True, exist_ok=True)
+    paths, system = [], v2["system_prompt"]
+    for step, (category, term) in enumerate(DRIFT_REMOVALS, start=1):
+        pattern = re.compile(rf"^(- {category}: .*?)(, {re.escape(term)}\b|\b{re.escape(term)}, )", re.M)
+        system, n = pattern.subn(r"\1", system, count=1)
+        assert n == 1, (category, term)
+        doc = dict(
+            v2,
+            version=f"v2.d{step}",
+            system_prompt=system,
+            description=f"Drift demo step {step}: v2 with '{term}' (and earlier steps) trimmed from {category}.",
+        )
+        path = DRIFT_DIR / f"v2-d{step}.yaml"
+        path.write_text(yaml.safe_dump(doc, sort_keys=False, allow_unicode=True, width=120))
+        paths.append(path)
+    return paths
+
+
+def headline(out: str) -> str:
+    for line in out.splitlines():
+        if line.startswith(("PASS", "WARN", "CRITICAL")):
+            return line
+        if line.startswith("no baseline"):
+            return "first run (nothing to compare against)"
+    return "?"
+
+
+def main_demo() -> None:
+    os.chdir(ROOT)
+    shutil.rmtree(OUT, ignore_errors=True)
+    OUT.mkdir(parents=True)
+    rows: list[str] = []
+    log: list[str] = []
+
+    # ---- 1. per-run regression detection
+    write_config("demo-versions")
+    for prompt in ("prompts/v1.yaml", "prompts/v2.yaml", "demo/prompts/v3-bad.yaml"):
+        name = Path(prompt).stem
+        code, out = cli(
+            "check",
+            "--against",
+            "previous",
+            "--prompt",
+            prompt,
+            "--report",
+            f"demo/out/{name}-report.html",
+            "--markdown",
+            f"demo/out/{name}-comment.md",
+        )
+        log.append(out)
+        rows.append(f"| `{name}` | {code} | {headline(out)} |")
+
+    # ---- 2. slow drift
+    write_config("demo-drift")
+    drift_rows: list[str] = []
+    sequence = [ROOT / "prompts" / "v2.yaml"] * 7 + build_drift_prompts()
+    for i, prompt in enumerate(sequence, start=1):
+        code, out = cli(
+            "check",
+            "--against",
+            "previous",
+            "--prompt",
+            str(prompt.relative_to(ROOT)),
+            "--report",
+            "demo/out/drift-latest-report.html",
+        )
+        log.append(out)
+        drift = next((ln.strip()[len("- slow drift: ") :] for ln in out.splitlines() if "slow drift:" in ln), "")
+        acc = re.search(r"accuracy ([\d.]+%)", out)
+        drift_rows.append(
+            f"| {i} | `{prompt.stem}` | {acc.group(1) if acc else '?'} | "
+            f"{headline(out).split(':')[0]} | {drift or '-'} |"
+        )
+
+    con = sqlite3.connect(OUT / "history.db")
+    runs = con.execute(
+        "SELECT track, prompt_version, accuracy, mean_summary_score, latency_p50_ms, latency_p95_ms,"
+        " total_tokens, status FROM runs ORDER BY seq"
+    ).fetchall()
+    con.close()
+    (OUT / "runs.json").write_text(json.dumps(runs, indent=1))
+    (OUT / "log.txt").write_text("\n".join(log))
+
+    results = [
+        "# Demo results (generated by `python scripts/run_demo.py`)",
+        "",
+        "Provider: built-in deterministic mock (`mock-classifier-v1`), judge: lexical F1. Latency is simulated",
+        "from token counts by the mock, not measured against a real model. Re-running reproduces these numbers.",
+        "",
+        "## Per-run regression detection (each prompt checked against the previous run)",
+        "",
+        "| Prompt | Exit code | Result |",
+        "|---|---|---|",
+        *rows,
+        "",
+        "Reports: `demo/out/v2-report.html`, `demo/out/v3-bad-report.html`; PR comment: `demo/out/v3-bad-comment.md`.",
+        "",
+        "## Slow drift (each run checked against the previous run, 7-run moving average)",
+        "",
+        "| # | Prompt | Accuracy | Per-run status | Slow-drift detector |",
+        "|---|---|---|---|---|",
+        *drift_rows,
+        "",
+        "## All recorded runs (SQLite)",
+        "",
+        "| Track | Prompt | Accuracy | Summary (1-5) | p50 ms | p95 ms | Tokens | Status |",
+        "|---|---|---|---|---|---|---|---|",
+        *[
+            f"| {t} | {p} | {a:.1%} | {s:.2f} | {p50:.0f} | {p95:.0f} | {tok} | {st} |"
+            for t, p, a, s, p50, p95, tok, st in runs
+        ],
+        "",
+    ]
+    (ROOT / "demo" / "RESULTS.md").write_text("\n".join(results))
+    print("\n".join(results))
+
+
+if __name__ == "__main__":
+    main_demo()

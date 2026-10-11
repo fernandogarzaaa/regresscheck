@@ -1,0 +1,815 @@
+{
+  "version": "2026.10.1",
+  "updated": "2026-10-11",
+  "description": "Hand-written support emails with human-labelled category and reference summary. Edit by hand only; see README 'Adding test cases'.",
+  "cases": [
+    {
+      "id": "bil-001",
+      "input": "Hi, I was charged twice for my March subscription. Can you refund the duplicate charge? Thanks, Priya",
+      "expected_category": "billing",
+      "ideal_summary": "Customer was charged twice for the March subscription and wants the duplicate refunded.",
+      "expected_difficulty": "easy",
+      "tags": [],
+      "notes": "Canonical duplicate-charge case; every prompt version must get this right."
+    },
+    {
+      "id": "bil-002",
+      "input": "Could you send me the invoice for order #48213? Our accounting department needs it for the quarter close.",
+      "expected_category": "billing",
+      "ideal_summary": "Customer needs the invoice for order #48213 for their accounting department.",
+      "expected_difficulty": "easy",
+      "tags": [],
+      "notes": "Invoice request with an order number the summary should keep."
+    },
+    {
+      "id": "bil-003",
+      "input": "I cancelled my plan on the 2nd but you still billed me $49 on the 5th. Please reverse it.",
+      "expected_category": "billing",
+      "ideal_summary": "Customer was billed $49 after cancelling their plan and wants the charge reversed.",
+      "expected_difficulty": "easy",
+      "tags": [],
+      "notes": "Mentions cancelling; the ask is about money, so billing."
+    },
+    {
+      "id": "bil-004",
+      "input": "What payment methods do you accept? I'd like to switch from credit card to PayPal for my monthly bill.",
+      "expected_category": "billing",
+      "ideal_summary": "Customer wants to switch their monthly payment from credit card to PayPal.",
+      "expected_difficulty": "easy",
+      "tags": [],
+      "notes": "Payment-method change."
+    },
+    {
+      "id": "bil-005",
+      "input": "My card on file expired. How do I update it before the next payment fails?",
+      "expected_category": "billing",
+      "ideal_summary": "Customer's card on file expired and they want to update it before the next payment.",
+      "expected_difficulty": "easy",
+      "tags": [],
+      "notes": "'Update' and 'card on file' could look like account settings; it is a payment method."
+    },
+    {
+      "id": "bil-006",
+      "input": "Hello, I've been a customer since 2021 on the annual plan. This year's renewal notice shows $240 instead of the $180 I paid last year, and I never got an email about a price increase. Is there any way to keep my old rate? If not, I'd like to downgrade to monthly before the renewal date on June 14. Regards, Tomás",
+      "expected_category": "billing",
+      "ideal_summary": "Customer's annual renewal rose from $180 to $240 without notice; they want the old rate or to downgrade to monthly before June 14.",
+      "expected_difficulty": "medium",
+      "tags": [
+        "long"
+      ],
+      "notes": "Long email with two asks; summary must keep both amounts and the deadline."
+    },
+    {
+      "id": "bil-007",
+      "input": "Hola, me cobraron dos veces este mes. Can you please check my account and refund one of the payments? Gracias.",
+      "expected_category": "billing",
+      "ideal_summary": "Customer was charged twice this month and wants one payment refunded.",
+      "expected_difficulty": "medium",
+      "tags": [
+        "mixed_language"
+      ],
+      "notes": "Spanish/English. 'check my account' is a distractor toward account."
+    },
+    {
+      "id": "bil-008",
+      "input": "The app crashed during checkout and now I see two pending charges on my card. Which one is real? I only want one subscription.",
+      "expected_category": "billing",
+      "ideal_summary": "After the app crashed at checkout the customer sees two pending charges and wants only one subscription.",
+      "expected_difficulty": "hard",
+      "tags": [
+        "ambiguous",
+        "multi_issue"
+      ],
+      "notes": "Crash pulls toward technical, but the customer's ask is about charges. Routing policy: money at risk goes to billing."
+    },
+    {
+      "id": "bil-009",
+      "input": "refund pls",
+      "expected_category": "billing",
+      "ideal_summary": "Customer is requesting a refund.",
+      "expected_difficulty": "medium",
+      "tags": [
+        "short"
+      ],
+      "notes": "Two-word email. Tests that a prompt does not need context to route an obvious keyword."
+    },
+    {
+      "id": "bil-010",
+      "input": "i was overcharhed on my last bil, it says 89 dolars but my plan is 59. pls fix",
+      "expected_category": "billing",
+      "ideal_summary": "Customer was overcharged $89 instead of their $59 plan price and wants it fixed.",
+      "expected_difficulty": "medium",
+      "tags": [
+        "typos"
+      ],
+      "notes": "Typos on the key words (overcharged, bill, dollars)."
+    },
+    {
+      "id": "bil-011",
+      "input": "Wow, love paying for a premium plan I downgraded from three months ago. Really fantastic way to treat loyal customers. Want my money back.",
+      "expected_category": "billing",
+      "ideal_summary": "Customer is still being charged for a premium plan they downgraded from three months ago and wants a refund.",
+      "expected_difficulty": "hard",
+      "tags": [
+        "sarcastic"
+      ],
+      "notes": "Sarcasm: positive words ('love', 'fantastic') hide a refund demand; no literal 'refund' or 'charge'."
+    },
+    {
+      "id": "bil-012",
+      "input": "Do you offer a discount for nonprofits? We're a registered charity and would like to buy 15 seats.",
+      "expected_category": "billing",
+      "ideal_summary": "Customer asks whether nonprofits get a discount on 15 seats for their charity.",
+      "expected_difficulty": "medium",
+      "tags": [
+        "ambiguous"
+      ],
+      "notes": "Pricing questions route to billing per team policy, even pre-purchase. Could read as general/sales."
+    },
+    {
+      "id": "bil-013",
+      "input": "Please add our VAT number GB123456789 to future invoices and reissue the one from May.",
+      "expected_category": "billing",
+      "ideal_summary": "Customer wants their VAT number added to future invoices and the May invoice reissued.",
+      "expected_difficulty": "easy",
+      "tags": [],
+      "notes": "Tax details on invoices."
+    },
+    {
+      "id": "bil-014",
+      "input": "The trial was supposed to be free but I see a $1 authorization on my statement. Is that a charge?",
+      "expected_category": "billing",
+      "ideal_summary": "Customer sees a $1 authorization after starting a free trial and asks if it is a charge.",
+      "expected_difficulty": "medium",
+      "tags": [],
+      "notes": "Card pre-authorization confusion."
+    },
+    {
+      "id": "bil-015",
+      "input": "How do I cancel my subscription so I'm not billed next month?",
+      "expected_category": "billing",
+      "ideal_summary": "Customer wants to cancel their subscription to avoid next month's bill.",
+      "expected_difficulty": "medium",
+      "tags": [
+        "ambiguous"
+      ],
+      "notes": "Cancelling a paid subscription to stop billing is billing. Contrast acc-018 (closing the account itself)."
+    },
+    {
+      "id": "bil-016",
+      "input": "Good day po! Na-charge po ako ng dalawang beses sa GCash for the same order. Pa-refund naman po ng isa. Salamat!",
+      "expected_category": "billing",
+      "ideal_summary": "Customer was charged twice via GCash for the same order and asks for one refund.",
+      "expected_difficulty": "hard",
+      "tags": [
+        "mixed_language"
+      ],
+      "notes": "Taglish. Keywords are embedded in Tagalog morphology (na-charge, pa-refund)."
+    },
+    {
+      "id": "bil-017",
+      "input": "Hi team, my payment didn't go through this morning because my bank flagged it, and now my workspace says it's suspended for non-payment. The bank has cleared it on their side. Could you retry the charge and restore access? We have a client demo at 3pm.",
+      "expected_category": "billing",
+      "ideal_summary": "Customer's payment was declined by their bank, the workspace is suspended, and they want the charge retried and access restored before a 3pm demo.",
+      "expected_difficulty": "medium",
+      "tags": [
+        "long",
+        "ambiguous"
+      ],
+      "notes": "'Restore access' pulls toward account; root cause is a failed payment."
+    },
+    {
+      "id": "bil-018",
+      "input": "Where can I find the receipt for my payment from 12 August?",
+      "expected_category": "billing",
+      "ideal_summary": "Customer is looking for the receipt for their 12 August payment.",
+      "expected_difficulty": "easy",
+      "tags": [],
+      "notes": "Receipt lookup."
+    },
+    {
+      "id": "bil-019",
+      "input": "Your pricing page says unlimited projects, but I hit a limit at 10 and the app is asking me to upgrade. Is this a bug or do I have to pay more?",
+      "expected_category": "billing",
+      "ideal_summary": "Customer hit a 10-project limit despite the pricing page promising unlimited projects and asks if it is a bug or a paid upgrade.",
+      "expected_difficulty": "hard",
+      "tags": [
+        "ambiguous"
+      ],
+      "notes": "Customer explicitly asks 'is this a bug'. Labelled billing: the dispute is about what the plan includes."
+    },
+    {
+      "id": "bil-020",
+      "input": "THIS IS THE THIRD TIME I'M ASKING. Refund the annual fee you took without my permission or I'm disputing it with my bank.",
+      "expected_category": "billing",
+      "ideal_summary": "Customer demands a refund of an annual fee taken without permission and threatens a bank dispute.",
+      "expected_difficulty": "medium",
+      "tags": [
+        "angry"
+      ],
+      "notes": "All-caps opener; tone must not change routing."
+    },
+    {
+      "id": "tec-001",
+      "input": "The mobile app crashes every time I open the camera to scan a receipt. iPhone 13, iOS 17.4.",
+      "expected_category": "technical",
+      "ideal_summary": "The mobile app crashes when the customer opens the camera to scan a receipt on an iPhone 13.",
+      "expected_difficulty": "easy",
+      "tags": [],
+      "notes": "'Receipt' is a billing distractor; the problem is a crash."
+    },
+    {
+      "id": "tec-002",
+      "input": "I'm getting 'Error 500: internal server error' when I try to export my report to PDF.",
+      "expected_category": "technical",
+      "ideal_summary": "Customer gets an Error 500 when exporting their report to PDF.",
+      "expected_difficulty": "easy",
+      "tags": [],
+      "notes": "Literal error code."
+    },
+    {
+      "id": "tec-003",
+      "input": "The dashboard has been loading forever since this morning. Is the service down?",
+      "expected_category": "technical",
+      "ideal_summary": "Customer's dashboard has not loaded since this morning and they ask if the service is down.",
+      "expected_difficulty": "easy",
+      "tags": [],
+      "notes": "Outage report without the word 'error'."
+    },
+    {
+      "id": "tec-004",
+      "input": "Files I upload over 50MB fail at 99% every time. Tried Chrome and Firefox.",
+      "expected_category": "technical",
+      "ideal_summary": "Customer's uploads over 50MB fail at 99% in both Chrome and Firefox.",
+      "expected_difficulty": "easy",
+      "tags": [],
+      "notes": "Upload failure with reproduction details."
+    },
+    {
+      "id": "tec-005",
+      "input": "Your API started returning 429 Too Many Requests even though we're well under our rate limit. Started around 14:00 UTC.",
+      "expected_category": "technical",
+      "ideal_summary": "Customer's API calls return 429 errors since 14:00 UTC despite being under the rate limit.",
+      "expected_difficulty": "medium",
+      "tags": [],
+      "notes": "Developer-facing; jargon only."
+    },
+    {
+      "id": "tec-006",
+      "input": "Calendar sync with Outlook stopped working. New meetings don't show up anymore.",
+      "expected_category": "technical",
+      "ideal_summary": "Customer's Outlook calendar sync stopped and new meetings no longer appear.",
+      "expected_difficulty": "easy",
+      "tags": [],
+      "notes": "Integration sync failure."
+    },
+    {
+      "id": "tec-007",
+      "input": "the app keeps frezing when i try to sycn my notes, ive reinstaled it twice alredy",
+      "expected_category": "technical",
+      "ideal_summary": "The app freezes when the customer syncs notes, even after reinstalling twice.",
+      "expected_difficulty": "medium",
+      "tags": [
+        "typos"
+      ],
+      "notes": "Typos on freezing, sync, reinstalled."
+    },
+    {
+      "id": "tec-008",
+      "input": "Great update. Now the save button does absolutely nothing. Really looking forward to retyping my whole document again.",
+      "expected_category": "technical",
+      "ideal_summary": "After the update the save button does nothing and the customer lost their document.",
+      "expected_difficulty": "hard",
+      "tags": [
+        "sarcastic"
+      ],
+      "notes": "Sarcasm; no error vocabulary at all."
+    },
+    {
+      "id": "tec-009",
+      "input": "app wont open",
+      "expected_category": "technical",
+      "ideal_summary": "The customer's app won't open.",
+      "expected_difficulty": "medium",
+      "tags": [
+        "short"
+      ],
+      "notes": "Three words, no keyword from a typical lexicon."
+    },
+    {
+      "id": "tec-010",
+      "input": "I reset my password but the app still says 'session expired' and kicks me out every few seconds.",
+      "expected_category": "technical",
+      "ideal_summary": "After a password reset the app keeps showing 'session expired' and logging the customer out every few seconds.",
+      "expected_difficulty": "hard",
+      "tags": [
+        "ambiguous"
+      ],
+      "notes": "Password mention pulls toward account, but the reset worked; the failure is a session bug."
+    },
+    {
+      "id": "tec-011",
+      "input": "Hello, since your release on Tuesday our webhook endpoint has stopped receiving order.created events. We can see the deliveries in your dashboard marked as 'sent', but nothing reaches our server, and our logs show no incoming requests. Other event types like order.updated still arrive. Could you check whether the signing or retry configuration changed?",
+      "expected_category": "technical",
+      "ideal_summary": "Since Tuesday's release, order.created webhook events stop reaching the customer's server while other events still arrive.",
+      "expected_difficulty": "medium",
+      "tags": [
+        "long"
+      ],
+      "notes": "Long, technical, the word 'order' is a weak billing distractor."
+    },
+    {
+      "id": "tec-012",
+      "input": "Hola, la aplicación no carga las imágenes desde ayer. I tried clearing the cache pero sigue igual.",
+      "expected_category": "technical",
+      "ideal_summary": "The app has not loaded images since yesterday, even after the customer cleared the cache.",
+      "expected_difficulty": "hard",
+      "tags": [
+        "mixed_language"
+      ],
+      "notes": "Spanish/English; the problem statement is in Spanish."
+    },
+    {
+      "id": "tec-013",
+      "input": "Push notifications stopped arriving on my Android phone after the last update.",
+      "expected_category": "technical",
+      "ideal_summary": "Push notifications stopped arriving on the customer's Android phone after the update.",
+      "expected_difficulty": "easy",
+      "tags": [],
+      "notes": "Regression after an app update."
+    },
+    {
+      "id": "tec-014",
+      "input": "The CSV import shows 'invalid date format' for dates like 03/04/2024. Is DD/MM supported?",
+      "expected_category": "technical",
+      "ideal_summary": "CSV import rejects dates like 03/04/2024 and the customer asks whether DD/MM is supported.",
+      "expected_difficulty": "medium",
+      "tags": [],
+      "notes": "Phrased as a question; still a bug/limitation report."
+    },
+    {
+      "id": "tec-015",
+      "input": "Two things: the search bar returns no results for anything with an accent (café, résumé), and the dark mode toggle resets every time I reload.",
+      "expected_category": "technical",
+      "ideal_summary": "Search returns nothing for accented words and the dark mode setting resets on reload.",
+      "expected_difficulty": "hard",
+      "tags": [
+        "multi_issue"
+      ],
+      "notes": "Two unrelated bugs; summary must mention both."
+    },
+    {
+      "id": "tec-016",
+      "input": "Getting a blank white screen after logging in on Safari. Works fine on Chrome.",
+      "expected_category": "technical",
+      "ideal_summary": "Customer sees a blank white screen after logging in on Safari, though Chrome works.",
+      "expected_difficulty": "medium",
+      "tags": [
+        "ambiguous"
+      ],
+      "notes": "'Logging in' pulls toward account; login succeeds, rendering fails."
+    },
+    {
+      "id": "tec-017",
+      "input": "Hi, sorry to bother you. The video call feature drops audio after about ten minutes every time. Is there a known issue?",
+      "expected_category": "technical",
+      "ideal_summary": "Video calls lose audio after about ten minutes and the customer asks if it is a known issue.",
+      "expected_difficulty": "medium",
+      "tags": [
+        "polite"
+      ],
+      "notes": "Apologetic tone; 'is there a known issue' reads like a general question."
+    },
+    {
+      "id": "tec-018",
+      "input": "The integration with Slack shows 'connection failed' when I try to authorize it.",
+      "expected_category": "technical",
+      "ideal_summary": "Customer's Slack integration fails with 'connection failed' during authorization.",
+      "expected_difficulty": "easy",
+      "tags": [],
+      "notes": "'Authorize' is a weak account distractor."
+    },
+    {
+      "id": "tec-019",
+      "input": "I was charged for the Pro plan but the Pro features are still greyed out after an hour.",
+      "expected_category": "technical",
+      "ideal_summary": "Customer paid for the Pro plan but Pro features are still unavailable after an hour.",
+      "expected_difficulty": "hard",
+      "tags": [
+        "ambiguous"
+      ],
+      "notes": "Payment succeeded; provisioning failed. Labelled technical, which is the team that fixes it. Strong billing distractor."
+    },
+    {
+      "id": "tec-020",
+      "input": "Your app deleted half my contacts during the sync last night. How is this acceptable?? I need them restored NOW.",
+      "expected_category": "technical",
+      "ideal_summary": "A sync last night deleted half the customer's contacts and they want them restored urgently.",
+      "expected_difficulty": "medium",
+      "tags": [
+        "angry"
+      ],
+      "notes": "Data-loss bug in an angry tone."
+    },
+    {
+      "id": "acc-001",
+      "input": "I forgot my password and the reset email never arrives. I've checked spam.",
+      "expected_category": "account",
+      "ideal_summary": "Customer forgot their password and the reset email is not arriving, even in spam.",
+      "expected_difficulty": "easy",
+      "tags": [],
+      "notes": "Canonical password reset."
+    },
+    {
+      "id": "acc-002",
+      "input": "How do I change the email address on my account? I'm leaving my current job.",
+      "expected_category": "account",
+      "ideal_summary": "Customer wants to change the email address on their account because they are leaving their job.",
+      "expected_difficulty": "easy",
+      "tags": [],
+      "notes": "Profile change."
+    },
+    {
+      "id": "acc-003",
+      "input": "My account is locked after too many login attempts. Can you unlock it?",
+      "expected_category": "account",
+      "ideal_summary": "Customer's account is locked after too many login attempts and they want it unlocked.",
+      "expected_difficulty": "easy",
+      "tags": [],
+      "notes": "Lockout."
+    },
+    {
+      "id": "acc-004",
+      "input": "Please delete my account and all my personal data under GDPR.",
+      "expected_category": "account",
+      "ideal_summary": "Customer requests deletion of their account and personal data under GDPR.",
+      "expected_difficulty": "easy",
+      "tags": [],
+      "notes": "Data deletion request; legal flavour but account-owned."
+    },
+    {
+      "id": "acc-005",
+      "input": "I got a new phone and lost access to my two-factor authentication app. How can I get back in?",
+      "expected_category": "account",
+      "ideal_summary": "Customer lost access to their two-factor authentication app after getting a new phone and needs to get back in.",
+      "expected_difficulty": "easy",
+      "tags": [],
+      "notes": "2FA recovery; 'phone' and 'app' are technical distractors."
+    },
+    {
+      "id": "acc-006",
+      "input": "Can I add a second admin to our team workspace? Our office manager needs to manage users.",
+      "expected_category": "account",
+      "ideal_summary": "Customer wants to add their office manager as a second admin on the team workspace.",
+      "expected_difficulty": "medium",
+      "tags": [],
+      "notes": "Roles and permissions."
+    },
+    {
+      "id": "acc-007",
+      "input": "cant acess my acount, it says usernmae not found but i definately signed up last week",
+      "expected_category": "account",
+      "ideal_summary": "Customer can't access their account; it says username not found though they signed up last week.",
+      "expected_difficulty": "medium",
+      "tags": [
+        "typos"
+      ],
+      "notes": "Typos on access, account, username."
+    },
+    {
+      "id": "acc-008",
+      "input": "I can't log in to download my receipts for last year and my accountant needs them by Friday.",
+      "expected_category": "account",
+      "ideal_summary": "Customer can't log in to download last year's receipts, which their accountant needs by Friday.",
+      "expected_difficulty": "hard",
+      "tags": [
+        "ambiguous"
+      ],
+      "notes": "Receipts pull toward billing, but the blocker is the login."
+    },
+    {
+      "id": "acc-009",
+      "input": "locked out",
+      "expected_category": "account",
+      "ideal_summary": "The customer is locked out of their account.",
+      "expected_difficulty": "medium",
+      "tags": [
+        "short"
+      ],
+      "notes": "Two words."
+    },
+    {
+      "id": "acc-010",
+      "input": "I signed up with Google but now want to use a regular password instead. Is that possible?",
+      "expected_category": "account",
+      "ideal_summary": "Customer signed up with Google and wants to switch to a regular password.",
+      "expected_difficulty": "medium",
+      "tags": [],
+      "notes": "SSO to password migration."
+    },
+    {
+      "id": "acc-011",
+      "input": "Fantastic, the 'secure' login now asks me to verify my identity every single time. I've verified it 12 times today. Truly secure.",
+      "expected_category": "account",
+      "ideal_summary": "Customer is asked to verify their identity at every login, 12 times today.",
+      "expected_difficulty": "hard",
+      "tags": [
+        "sarcastic",
+        "ambiguous"
+      ],
+      "notes": "Sarcasm; could be read as a technical bug. Labelled account: verification settings are owned by the account team."
+    },
+    {
+      "id": "acc-012",
+      "input": "Bonjour, je voudrais changer mon nom d'utilisateur. I got married and my username still has my old name.",
+      "expected_category": "account",
+      "ideal_summary": "Customer wants to change their username after getting married.",
+      "expected_difficulty": "medium",
+      "tags": [
+        "mixed_language"
+      ],
+      "notes": "French/English."
+    },
+    {
+      "id": "acc-013",
+      "input": "Someone logged into my account from another country. I didn't do this. Please secure my account.",
+      "expected_category": "account",
+      "ideal_summary": "Customer reports an unrecognised login from another country and wants the account secured.",
+      "expected_difficulty": "easy",
+      "tags": [],
+      "notes": "Security incident on an account."
+    },
+    {
+      "id": "acc-014",
+      "input": "Hi, our previous IT admin left the company and he was the only owner of our organization account. We still pay for 25 seats but nobody can manage users or change settings. How do we transfer ownership to me? I'm the new IT lead and can provide proof of employment.",
+      "expected_category": "account",
+      "ideal_summary": "The only owner of the customer's organization account left the company, and the new IT lead wants ownership transferred.",
+      "expected_difficulty": "medium",
+      "tags": [
+        "long"
+      ],
+      "notes": "'We still pay for 25 seats' is a billing distractor."
+    },
+    {
+      "id": "acc-015",
+      "input": "How do I turn on two-factor authentication?",
+      "expected_category": "account",
+      "ideal_summary": "Customer asks how to enable two-factor authentication.",
+      "expected_difficulty": "easy",
+      "tags": [],
+      "notes": "Short how-to question on account security."
+    },
+    {
+      "id": "acc-016",
+      "input": "Hello po, hindi ko ma-access yung account ko kasi nakalimutan ko yung password. Paano po mag-reset?",
+      "expected_category": "account",
+      "ideal_summary": "Customer forgot their password and asks how to reset it to access their account.",
+      "expected_difficulty": "hard",
+      "tags": [
+        "mixed_language"
+      ],
+      "notes": "Taglish."
+    },
+    {
+      "id": "acc-017",
+      "input": "Please merge my two accounts. I accidentally created one with my work email and one with my personal email.",
+      "expected_category": "account",
+      "ideal_summary": "Customer wants to merge two accounts created with their work and personal emails.",
+      "expected_difficulty": "medium",
+      "tags": [],
+      "notes": "Account merge."
+    },
+    {
+      "id": "acc-018",
+      "input": "Can you cancel my account? I don't use it anymore.",
+      "expected_category": "account",
+      "ideal_summary": "Customer wants to close their account because they no longer use it.",
+      "expected_difficulty": "hard",
+      "tags": [
+        "ambiguous"
+      ],
+      "notes": "Closing the account itself is account. Contrast bil-015 (cancelling a subscription to stop billing)."
+    },
+    {
+      "id": "acc-019",
+      "input": "I want to update my profile picture but the option is missing from settings.",
+      "expected_category": "account",
+      "ideal_summary": "Customer wants to update their profile picture but the option is missing from settings.",
+      "expected_difficulty": "medium",
+      "tags": [
+        "ambiguous"
+      ],
+      "notes": "'Option is missing' reads like a bug; labelled account (profile settings)."
+    },
+    {
+      "id": "acc-020",
+      "input": "I've been locked out for three days and nobody answers. Give me my account back today.",
+      "expected_category": "account",
+      "ideal_summary": "Customer has been locked out for three days without a response and wants account access restored today.",
+      "expected_difficulty": "medium",
+      "tags": [
+        "angry"
+      ],
+      "notes": "Angry; no literal password/login word."
+    },
+    {
+      "id": "gen-001",
+      "input": "What are your support hours on weekends?",
+      "expected_category": "general",
+      "ideal_summary": "Customer asks about weekend support hours.",
+      "expected_difficulty": "easy",
+      "tags": [],
+      "notes": "Canonical general question."
+    },
+    {
+      "id": "gen-002",
+      "input": "Do you have an office in Manila? I'd love to visit for a demo.",
+      "expected_category": "general",
+      "ideal_summary": "Customer asks whether there is a Manila office they can visit for a demo.",
+      "expected_difficulty": "easy",
+      "tags": [],
+      "notes": "Company info."
+    },
+    {
+      "id": "gen-003",
+      "input": "Just wanted to say the new design looks great. Keep it up!",
+      "expected_category": "general",
+      "ideal_summary": "Customer compliments the new design.",
+      "expected_difficulty": "easy",
+      "tags": [],
+      "notes": "Praise, no request."
+    },
+    {
+      "id": "gen-004",
+      "input": "Are you hiring frontend developers? I couldn't find a careers page.",
+      "expected_category": "general",
+      "ideal_summary": "Customer asks whether frontend developer roles are open and can't find the careers page.",
+      "expected_difficulty": "easy",
+      "tags": [],
+      "notes": "Careers question."
+    },
+    {
+      "id": "gen-005",
+      "input": "We'd like to discuss a partnership between our companies. Who should I contact?",
+      "expected_category": "general",
+      "ideal_summary": "Customer wants to discuss a partnership and asks who to contact.",
+      "expected_difficulty": "easy",
+      "tags": [],
+      "notes": "Partnership inquiry."
+    },
+    {
+      "id": "gen-006",
+      "input": "Do you have a public roadmap? Wondering if offline mode is planned.",
+      "expected_category": "general",
+      "ideal_summary": "Customer asks for a public roadmap and whether offline mode is planned.",
+      "expected_difficulty": "medium",
+      "tags": [],
+      "notes": "Feature request phrased as a question."
+    },
+    {
+      "id": "gen-007",
+      "input": "do u guys have a comunity forum or discrod server where users can share tempaltes?",
+      "expected_category": "general",
+      "ideal_summary": "Customer asks whether there is a community forum or Discord server for sharing templates.",
+      "expected_difficulty": "medium",
+      "tags": [
+        "typos"
+      ],
+      "notes": "Typos on community, Discord, templates."
+    },
+    {
+      "id": "gen-008",
+      "input": "Oh sure, I'll just wait another month for that dark mode you promised in January. No rush.",
+      "expected_category": "general",
+      "ideal_summary": "Customer is frustrated that the dark mode promised in January has still not shipped.",
+      "expected_difficulty": "hard",
+      "tags": [
+        "sarcastic"
+      ],
+      "notes": "Sarcastic feature-request complaint; can be misread as a bug."
+    },
+    {
+      "id": "gen-009",
+      "input": "hello?",
+      "expected_category": "general",
+      "ideal_summary": "The customer sent a greeting with no request.",
+      "expected_difficulty": "medium",
+      "tags": [
+        "short"
+      ],
+      "notes": "No content at all; the correct fallback is general."
+    },
+    {
+      "id": "gen-010",
+      "input": "Is my data stored in the EU? Our compliance team needs to know before we sign up.",
+      "expected_category": "general",
+      "ideal_summary": "Customer's compliance team asks whether data is stored in the EU before signing up.",
+      "expected_difficulty": "medium",
+      "tags": [],
+      "notes": "Pre-sales compliance; 'sign up' is an account distractor."
+    },
+    {
+      "id": "gen-011",
+      "input": "Hi there, I'm writing an article for a small business blog about tools that help remote teams, and I'd like to include your product. Could someone from your team answer three or four questions by email next week? I'd also appreciate a high-resolution logo if you have a press kit.",
+      "expected_category": "general",
+      "ideal_summary": "A blogger wants to feature the product and asks for a short email interview and a press kit logo.",
+      "expected_difficulty": "medium",
+      "tags": [
+        "long"
+      ],
+      "notes": "Press inquiry."
+    },
+    {
+      "id": "gen-012",
+      "input": "Hallo! Gibt es eure App auch auf Deutsch? My team in Berlin would prefer the German interface.",
+      "expected_category": "general",
+      "ideal_summary": "Customer asks whether the app is available in German for their Berlin team.",
+      "expected_difficulty": "hard",
+      "tags": [
+        "mixed_language"
+      ],
+      "notes": "German/English."
+    },
+    {
+      "id": "gen-013",
+      "input": "Can you recommend some tutorials for getting started? I'm new to the platform.",
+      "expected_category": "general",
+      "ideal_summary": "Customer is new and asks for getting-started tutorials.",
+      "expected_difficulty": "easy",
+      "tags": [],
+      "notes": "Onboarding help."
+    },
+    {
+      "id": "gen-014",
+      "input": "Thinking about moving our team over from a competitor. What would migration look like and is there a cost?",
+      "expected_category": "general",
+      "ideal_summary": "Customer is considering migrating their team from a competitor and asks about the process and cost.",
+      "expected_difficulty": "hard",
+      "tags": [
+        "ambiguous"
+      ],
+      "notes": "'Cost' pulls toward billing; this is a pre-sales conversation."
+    },
+    {
+      "id": "gen-015",
+      "input": "Do you have a mobile app for tablets?",
+      "expected_category": "general",
+      "ideal_summary": "Customer asks whether there is a tablet app.",
+      "expected_difficulty": "easy",
+      "tags": [],
+      "notes": "Product availability; 'app' is a technical distractor."
+    },
+    {
+      "id": "gen-016",
+      "input": "Thank you so much to Maria from your support team, she was incredibly patient with me yesterday.",
+      "expected_category": "general",
+      "ideal_summary": "Customer thanks support agent Maria for her patience yesterday.",
+      "expected_difficulty": "medium",
+      "tags": [
+        "polite"
+      ],
+      "notes": "Praise for an agent."
+    },
+    {
+      "id": "gen-017",
+      "input": "Your app keeps getting better, but I wish the export had more formats like Markdown. Any plans?",
+      "expected_category": "general",
+      "ideal_summary": "Customer likes the app and asks whether more export formats such as Markdown are planned.",
+      "expected_difficulty": "hard",
+      "tags": [
+        "ambiguous"
+      ],
+      "notes": "Feature request; 'export' pulls toward technical (see tec-002)."
+    },
+    {
+      "id": "gen-018",
+      "input": "Where can I find your terms of service and privacy policy?",
+      "expected_category": "general",
+      "ideal_summary": "Customer asks where to find the terms of service and privacy policy.",
+      "expected_difficulty": "easy",
+      "tags": [],
+      "notes": "Legal docs."
+    },
+    {
+      "id": "gen-019",
+      "input": "Do you donate to any open source projects? Curious about your company values.",
+      "expected_category": "general",
+      "ideal_summary": "Customer asks whether the company supports open source projects.",
+      "expected_difficulty": "medium",
+      "tags": [],
+      "notes": "Company values."
+    },
+    {
+      "id": "gen-020",
+      "input": "Salamat po sa tulong! 👍",
+      "expected_category": "general",
+      "ideal_summary": "Customer thanks support for their help.",
+      "expected_difficulty": "hard",
+      "tags": [
+        "mixed_language",
+        "short"
+      ],
+      "notes": "Tagalog thank-you with an emoji only."
+    }
+  ]
+}

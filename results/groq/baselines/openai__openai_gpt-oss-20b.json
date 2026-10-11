@@ -1,0 +1,1344 @@
+{
+  "run_id": "945ad430b00f",
+  "created_at": "2026-10-11T13:07:27+00:00",
+  "track": "groq-demo",
+  "prompt_version": "v2",
+  "prompt_sha": "fd75c34b49d1",
+  "dataset_version": "2026.10.1",
+  "provider": "openai",
+  "model": "openai/gpt-oss-20b",
+  "judge": "llm:openai/gpt-oss-20b",
+  "cases": [
+    {
+      "case_id": "bil-001",
+      "expected": "billing",
+      "predicted": "billing",
+      "passed": true,
+      "summary": "Customer was double charged for March subscription and requests a refund for the duplicate charge.",
+      "summary_score": 5,
+      "latency_ms": 210.12493300008828,
+      "prompt_tokens": 554,
+      "completion_tokens": 39,
+      "judge_tokens": 278,
+      "difficulty": "easy",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "bil-002",
+      "expected": "billing",
+      "predicted": "billing",
+      "passed": true,
+      "summary": "Customer requests the invoice for order #48213 for accounting purposes.",
+      "summary_score": 5,
+      "latency_ms": 231.70945699985168,
+      "prompt_tokens": 554,
+      "completion_tokens": 36,
+      "judge_tokens": 274,
+      "difficulty": "easy",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "bil-003",
+      "expected": "billing",
+      "predicted": "billing",
+      "passed": true,
+      "summary": "Customer cancelled plan but was still billed $49 and requests a refund.",
+      "summary_score": 5,
+      "latency_ms": 166.09548300016286,
+      "prompt_tokens": 558,
+      "completion_tokens": 37,
+      "judge_tokens": 279,
+      "difficulty": "easy",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "bil-004",
+      "expected": "billing",
+      "predicted": "billing",
+      "passed": true,
+      "summary": "Customer wants to know accepted payment methods and how to switch from credit card to PayPal for their monthly bill.",
+      "summary_score": 5,
+      "latency_ms": 223.35126899997704,
+      "prompt_tokens": 554,
+      "completion_tokens": 45,
+      "judge_tokens": 315,
+      "difficulty": "easy",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "bil-005",
+      "expected": "billing",
+      "predicted": "billing",
+      "passed": true,
+      "summary": "Customer wants to update an expired card on file before the next payment fails.",
+      "summary_score": 5,
+      "latency_ms": 290.41014099993845,
+      "prompt_tokens": 549,
+      "completion_tokens": 38,
+      "judge_tokens": 274,
+      "difficulty": "easy",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "bil-006",
+      "expected": "billing",
+      "predicted": "billing",
+      "passed": true,
+      "summary": "Customer notices a higher renewal price, wants to keep old rate or downgrade to monthly before June 14.",
+      "summary_score": 5,
+      "latency_ms": 321.4468989999659,
+      "prompt_tokens": 607,
+      "completion_tokens": 44,
+      "judge_tokens": 355,
+      "difficulty": "medium",
+      "tags": [
+        "long"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "bil-007",
+      "expected": "billing",
+      "predicted": "billing",
+      "passed": true,
+      "summary": "Customer reports being charged twice this month and requests a refund for one of the payments.",
+      "summary_score": 5,
+      "latency_ms": 161.35889800011682,
+      "prompt_tokens": 557,
+      "completion_tokens": 45,
+      "judge_tokens": 277,
+      "difficulty": "medium",
+      "tags": [
+        "mixed_language"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "bil-008",
+      "expected": "billing",
+      "predicted": "billing",
+      "passed": true,
+      "summary": "Customer reports app crash during checkout, sees two pending charges, and wants to know which one is valid.",
+      "summary_score": 5,
+      "latency_ms": 303.53078500002084,
+      "prompt_tokens": 559,
+      "completion_tokens": 44,
+      "judge_tokens": 293,
+      "difficulty": "hard",
+      "tags": [
+        "ambiguous",
+        "multi_issue"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "bil-009",
+      "expected": "billing",
+      "predicted": "billing",
+      "passed": true,
+      "summary": "Customer requests a refund.",
+      "summary_score": 5,
+      "latency_ms": 294.7165739999491,
+      "prompt_tokens": 534,
+      "completion_tokens": 29,
+      "judge_tokens": 234,
+      "difficulty": "medium",
+      "tags": [
+        "short"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "bil-010",
+      "expected": "billing",
+      "predicted": "billing",
+      "passed": true,
+      "summary": "Customer was overcharged on the last bill, showing $89 instead of the $59 plan fee, and requests a fix.",
+      "summary_score": 5,
+      "latency_ms": 307.049515000017,
+      "prompt_tokens": 557,
+      "completion_tokens": 48,
+      "judge_tokens": 294,
+      "difficulty": "medium",
+      "tags": [
+        "typos"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "bil-011",
+      "expected": "billing",
+      "predicted": "billing",
+      "passed": true,
+      "summary": "Customer wants a refund after downgrading from a premium plan, praising the service.",
+      "summary_score": 3,
+      "latency_ms": 258.77652100007253,
+      "prompt_tokens": 562,
+      "completion_tokens": 48,
+      "judge_tokens": 332,
+      "difficulty": "hard",
+      "tags": [
+        "sarcastic"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "bil-012",
+      "expected": "billing",
+      "predicted": "billing",
+      "passed": true,
+      "summary": "Customer requests a nonprofit discount for purchasing 15 seats.",
+      "summary_score": 5,
+      "latency_ms": 292.114999000205,
+      "prompt_tokens": 553,
+      "completion_tokens": 42,
+      "judge_tokens": 268,
+      "difficulty": "medium",
+      "tags": [
+        "ambiguous"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "bil-013",
+      "expected": "billing",
+      "predicted": "billing",
+      "passed": true,
+      "summary": "Customer requests adding a VAT number to future invoices and reissuing the May invoice.",
+      "summary_score": 5,
+      "latency_ms": 190.03730800000085,
+      "prompt_tokens": 552,
+      "completion_tokens": 40,
+      "judge_tokens": 273,
+      "difficulty": "easy",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "bil-014",
+      "expected": "billing",
+      "predicted": "billing",
+      "passed": true,
+      "summary": "Customer notices a $1 authorization on their statement and questions whether it is a charge.",
+      "summary_score": 5,
+      "latency_ms": 179.97087899993858,
+      "prompt_tokens": 555,
+      "completion_tokens": 40,
+      "judge_tokens": 284,
+      "difficulty": "medium",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "bil-015",
+      "expected": "billing",
+      "predicted": "billing",
+      "passed": true,
+      "summary": "Customer wants to cancel their subscription to avoid being billed next month.",
+      "summary_score": 5,
+      "latency_ms": 186.06893099990884,
+      "prompt_tokens": 545,
+      "completion_tokens": 35,
+      "judge_tokens": 264,
+      "difficulty": "medium",
+      "tags": [
+        "ambiguous"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "bil-016",
+      "expected": "billing",
+      "predicted": "billing",
+      "passed": true,
+      "summary": "Customer was double-charged on GCash for the same order and requests a refund for one of the charges.",
+      "summary_score": 5,
+      "latency_ms": 257.86302300002717,
+      "prompt_tokens": 563,
+      "completion_tokens": 46,
+      "judge_tokens": 296,
+      "difficulty": "hard",
+      "tags": [
+        "mixed_language"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "bil-017",
+      "expected": "billing",
+      "predicted": "billing",
+      "passed": true,
+      "summary": "Customer’s payment failed due to bank flag, workspace suspended; they request retrying the charge and restoring access for a demo.",
+      "summary_score": 5,
+      "latency_ms": 228.5812119998809,
+      "prompt_tokens": 587,
+      "completion_tokens": 48,
+      "judge_tokens": 341,
+      "difficulty": "medium",
+      "tags": [
+        "long",
+        "ambiguous"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "bil-018",
+      "expected": "billing",
+      "predicted": "billing",
+      "passed": true,
+      "summary": "Customer wants to locate the receipt for a payment made on 12 August.",
+      "summary_score": 5,
+      "latency_ms": 288.5153510001146,
+      "prompt_tokens": 546,
+      "completion_tokens": 38,
+      "judge_tokens": 267,
+      "difficulty": "easy",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "bil-019",
+      "expected": "billing",
+      "predicted": "billing",
+      "passed": true,
+      "summary": "Customer reports a discrepancy between the unlimited projects claim and a 10‑project limit, asking if it’s a bug or a paid feature.",
+      "summary_score": 5,
+      "latency_ms": 165.75669500002732,
+      "prompt_tokens": 568,
+      "completion_tokens": 51,
+      "judge_tokens": 312,
+      "difficulty": "hard",
+      "tags": [
+        "ambiguous"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "bil-020",
+      "expected": "billing",
+      "predicted": "billing",
+      "passed": true,
+      "summary": "Customer demands a refund for an annual fee charged without permission and threatens to dispute with the bank.",
+      "summary_score": 5,
+      "latency_ms": 302.85461699986627,
+      "prompt_tokens": 560,
+      "completion_tokens": 42,
+      "judge_tokens": 287,
+      "difficulty": "medium",
+      "tags": [
+        "angry"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "tec-001",
+      "expected": "technical",
+      "predicted": "technical",
+      "passed": true,
+      "summary": "Customer reports the mobile app crashes when opening the camera to scan a receipt on iPhone 13, iOS 17.4.",
+      "summary_score": 5,
+      "latency_ms": 281.90389500014135,
+      "prompt_tokens": 559,
+      "completion_tokens": 49,
+      "judge_tokens": 310,
+      "difficulty": "easy",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "tec-002",
+      "expected": "technical",
+      "predicted": "technical",
+      "passed": true,
+      "summary": "Customer receives an internal server error when attempting to export a report to PDF.",
+      "summary_score": 5,
+      "latency_ms": 215.73254500003713,
+      "prompt_tokens": 553,
+      "completion_tokens": 43,
+      "judge_tokens": 274,
+      "difficulty": "easy",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "tec-003",
+      "expected": "technical",
+      "predicted": "technical",
+      "passed": true,
+      "summary": "Customer reports the dashboard is loading indefinitely and asks if the service is down.",
+      "summary_score": 5,
+      "latency_ms": 312.6515310000286,
+      "prompt_tokens": 547,
+      "completion_tokens": 43,
+      "judge_tokens": 273,
+      "difficulty": "easy",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "tec-004",
+      "expected": "technical",
+      "predicted": "technical",
+      "passed": true,
+      "summary": "Customer reports that uploads over 50MB fail at 99% regardless of browser.",
+      "summary_score": 5,
+      "latency_ms": 353.6078309998629,
+      "prompt_tokens": 552,
+      "completion_tokens": 45,
+      "judge_tokens": 299,
+      "difficulty": "easy",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "tec-005",
+      "expected": "technical",
+      "predicted": "technical",
+      "passed": true,
+      "summary": "Customer reports API returning 429 Too Many Requests despite being under rate limit, starting at 14:00 UTC.",
+      "summary_score": 5,
+      "latency_ms": 126.16861299989068,
+      "prompt_tokens": 558,
+      "completion_tokens": 48,
+      "judge_tokens": 298,
+      "difficulty": "medium",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "tec-006",
+      "expected": "technical",
+      "predicted": "technical",
+      "passed": true,
+      "summary": "Customer reports that calendar sync with Outlook stopped, so new meetings no longer appear.",
+      "summary_score": 5,
+      "latency_ms": 312.3217909999312,
+      "prompt_tokens": 546,
+      "completion_tokens": 44,
+      "judge_tokens": 269,
+      "difficulty": "easy",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "tec-007",
+      "expected": "technical",
+      "predicted": "technical",
+      "passed": true,
+      "summary": "Customer reports the app freezes during note sync despite reinstalling.",
+      "summary_score": 5,
+      "latency_ms": 334.9066490000041,
+      "prompt_tokens": 553,
+      "completion_tokens": 40,
+      "judge_tokens": 289,
+      "difficulty": "medium",
+      "tags": [
+        "typos"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "tec-008",
+      "expected": "technical",
+      "predicted": "technical",
+      "passed": true,
+      "summary": "Customer reports that the save button is not working after an update, causing frustration.",
+      "summary_score": 3,
+      "latency_ms": 331.45009999998365,
+      "prompt_tokens": 554,
+      "completion_tokens": 46,
+      "judge_tokens": 291,
+      "difficulty": "hard",
+      "tags": [
+        "sarcastic"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "tec-009",
+      "expected": "technical",
+      "predicted": "technical",
+      "passed": true,
+      "summary": "Customer reports that the app will not open.",
+      "summary_score": 5,
+      "latency_ms": 157.7120490001107,
+      "prompt_tokens": 535,
+      "completion_tokens": 34,
+      "judge_tokens": 244,
+      "difficulty": "medium",
+      "tags": [
+        "short"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "tec-010",
+      "expected": "technical",
+      "predicted": "account",
+      "passed": false,
+      "summary": "Customer reset password but the app shows 'session expired' and logs them out repeatedly.",
+      "summary_score": 5,
+      "latency_ms": 238.9529990000483,
+      "prompt_tokens": 553,
+      "completion_tokens": 53,
+      "judge_tokens": 284,
+      "difficulty": "hard",
+      "tags": [
+        "ambiguous"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "tec-011",
+      "expected": "technical",
+      "predicted": "technical",
+      "passed": true,
+      "summary": "Customer reports that order.created webhook events are not reaching their server after a recent release, while other events still arrive.",
+      "summary_score": 5,
+      "latency_ms": 296.03181199991013,
+      "prompt_tokens": 596,
+      "completion_tokens": 44,
+      "judge_tokens": 353,
+      "difficulty": "medium",
+      "tags": [
+        "long"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "tec-012",
+      "expected": "technical",
+      "predicted": "technical",
+      "passed": true,
+      "summary": "The customer reports that the app is not loading images and clearing the cache did not help.",
+      "summary_score": 5,
+      "latency_ms": 342.4774750001234,
+      "prompt_tokens": 552,
+      "completion_tokens": 47,
+      "judge_tokens": 283,
+      "difficulty": "hard",
+      "tags": [
+        "mixed_language"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "tec-013",
+      "expected": "technical",
+      "predicted": "technical",
+      "passed": true,
+      "summary": "Customer reports that push notifications stopped arriving on their Android phone after the latest update.",
+      "summary_score": 5,
+      "latency_ms": 335.2152339998611,
+      "prompt_tokens": 545,
+      "completion_tokens": 49,
+      "judge_tokens": 273,
+      "difficulty": "easy",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "tec-014",
+      "expected": "technical",
+      "predicted": "technical",
+      "passed": true,
+      "summary": "Customer reports CSV import errors with dates formatted as DD/MM/2024, asking if that format is supported.",
+      "summary_score": 5,
+      "latency_ms": 354.9878710000485,
+      "prompt_tokens": 557,
+      "completion_tokens": 50,
+      "judge_tokens": 349,
+      "difficulty": "medium",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "tec-015",
+      "expected": "technical",
+      "predicted": "technical",
+      "passed": true,
+      "summary": "Customer reports search fails for accented words and dark mode toggle resets on reload.",
+      "summary_score": 5,
+      "latency_ms": 255.4436689999875,
+      "prompt_tokens": 563,
+      "completion_tokens": 43,
+      "judge_tokens": 286,
+      "difficulty": "hard",
+      "tags": [
+        "multi_issue"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "tec-016",
+      "expected": "technical",
+      "predicted": "technical",
+      "passed": true,
+      "summary": "Customer experiences a blank white screen after logging in on Safari, but works fine on Chrome.",
+      "summary_score": 5,
+      "latency_ms": 297.5948650000646,
+      "prompt_tokens": 548,
+      "completion_tokens": 43,
+      "judge_tokens": 278,
+      "difficulty": "medium",
+      "tags": [
+        "ambiguous"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "tec-017",
+      "expected": "technical",
+      "predicted": null,
+      "passed": false,
+      "summary": null,
+      "summary_score": 1,
+      "latency_ms": 0.0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "judge_tokens": 0,
+      "difficulty": "medium",
+      "tags": [
+        "polite"
+      ],
+      "error": "ProviderError: HTTP 429: {\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01kfzv8er2f0vst0ge07fd7egg` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7688, Requ"
+    },
+    {
+      "case_id": "tec-018",
+      "expected": "technical",
+      "predicted": "technical",
+      "passed": true,
+      "summary": "Customer reports a 'connection failed' error when attempting to authorize the Slack integration.",
+      "summary_score": 5,
+      "latency_ms": 291.13339699983953,
+      "prompt_tokens": 548,
+      "completion_tokens": 41,
+      "judge_tokens": 273,
+      "difficulty": "easy",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "tec-019",
+      "expected": "technical",
+      "predicted": "billing",
+      "passed": false,
+      "summary": "Customer was charged for the Pro plan but the Pro features remain greyed out after an hour.",
+      "summary_score": 5,
+      "latency_ms": 294.37860000007277,
+      "prompt_tokens": 552,
+      "completion_tokens": 43,
+      "judge_tokens": 286,
+      "difficulty": "hard",
+      "tags": [
+        "ambiguous"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "tec-020",
+      "expected": "technical",
+      "predicted": "technical",
+      "passed": true,
+      "summary": "Customer reports that the app deleted half of their contacts during sync and requests immediate restoration.",
+      "summary_score": 5,
+      "latency_ms": 272.4793059999229,
+      "prompt_tokens": 555,
+      "completion_tokens": 50,
+      "judge_tokens": 279,
+      "difficulty": "medium",
+      "tags": [
+        "angry"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "acc-001",
+      "expected": "account",
+      "predicted": "account",
+      "passed": true,
+      "summary": "Customer forgot password and reset email never arrives, even after checking spam.",
+      "summary_score": 5,
+      "latency_ms": 270.1209470001231,
+      "prompt_tokens": 547,
+      "completion_tokens": 38,
+      "judge_tokens": 270,
+      "difficulty": "easy",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "acc-002",
+      "expected": "account",
+      "predicted": "account",
+      "passed": true,
+      "summary": "Customer wants to change the email address on their account because they are leaving their current job.",
+      "summary_score": 5,
+      "latency_ms": 224.90756600018358,
+      "prompt_tokens": 549,
+      "completion_tokens": 42,
+      "judge_tokens": 273,
+      "difficulty": "easy",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "acc-003",
+      "expected": "account",
+      "predicted": "account",
+      "passed": true,
+      "summary": "Customer’s account is locked after multiple login attempts and requests it be unlocked.",
+      "summary_score": 5,
+      "latency_ms": 182.4273129998346,
+      "prompt_tokens": 547,
+      "completion_tokens": 39,
+      "judge_tokens": 272,
+      "difficulty": "easy",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "acc-004",
+      "expected": "account",
+      "predicted": "account",
+      "passed": true,
+      "summary": "Customer requests deletion of their account and all personal data under GDPR.",
+      "summary_score": 5,
+      "latency_ms": 205.50561999993988,
+      "prompt_tokens": 544,
+      "completion_tokens": 43,
+      "judge_tokens": 253,
+      "difficulty": "easy",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "acc-005",
+      "expected": "account",
+      "predicted": "account",
+      "passed": true,
+      "summary": "Customer lost access to their two‑factor authentication app on a new phone and needs to regain account access.",
+      "summary_score": 5,
+      "latency_ms": 204.25235699985933,
+      "prompt_tokens": 554,
+      "completion_tokens": 51,
+      "judge_tokens": 296,
+      "difficulty": "easy",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "acc-006",
+      "expected": "account",
+      "predicted": "account",
+      "passed": true,
+      "summary": "Customer wants to add a second admin to their team workspace for user management.",
+      "summary_score": 4,
+      "latency_ms": 346.8205849999322,
+      "prompt_tokens": 551,
+      "completion_tokens": 39,
+      "judge_tokens": 305,
+      "difficulty": "medium",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "acc-007",
+      "expected": "account",
+      "predicted": "account",
+      "passed": true,
+      "summary": "Customer cannot access account; system reports username not found despite recent signup.",
+      "summary_score": 5,
+      "latency_ms": 178.83831599988298,
+      "prompt_tokens": 553,
+      "completion_tokens": 38,
+      "judge_tokens": 279,
+      "difficulty": "medium",
+      "tags": [
+        "typos"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "acc-008",
+      "expected": "account",
+      "predicted": "account",
+      "passed": true,
+      "summary": "Customer cannot log in to download last year's receipts needed by accountant.",
+      "summary_score": 4,
+      "latency_ms": 235.41459100010798,
+      "prompt_tokens": 551,
+      "completion_tokens": 37,
+      "judge_tokens": 286,
+      "difficulty": "hard",
+      "tags": [
+        "ambiguous"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "acc-009",
+      "expected": "account",
+      "predicted": "account",
+      "passed": true,
+      "summary": "Customer is locked out of their account.",
+      "summary_score": 5,
+      "latency_ms": 314.0940999999202,
+      "prompt_tokens": 534,
+      "completion_tokens": 32,
+      "judge_tokens": 235,
+      "difficulty": "medium",
+      "tags": [
+        "short"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "acc-010",
+      "expected": "account",
+      "predicted": "account",
+      "passed": true,
+      "summary": "Customer wants to switch from Google sign‑in to a regular password login.",
+      "summary_score": 5,
+      "latency_ms": 261.6756559998521,
+      "prompt_tokens": 551,
+      "completion_tokens": 41,
+      "judge_tokens": 273,
+      "difficulty": "medium",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "acc-011",
+      "expected": "account",
+      "predicted": "account",
+      "passed": true,
+      "summary": "Customer complains that the secure login now requires identity verification every time, despite having verified multiple times.",
+      "summary_score": 5,
+      "latency_ms": 120.5773249998856,
+      "prompt_tokens": 561,
+      "completion_tokens": 47,
+      "judge_tokens": 302,
+      "difficulty": "hard",
+      "tags": [
+        "sarcastic",
+        "ambiguous"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "acc-012",
+      "expected": "account",
+      "predicted": "account",
+      "passed": true,
+      "summary": "Customer wants to change their username after marriage.",
+      "summary_score": 5,
+      "latency_ms": 283.82111799987797,
+      "prompt_tokens": 554,
+      "completion_tokens": 33,
+      "judge_tokens": 279,
+      "difficulty": "medium",
+      "tags": [
+        "mixed_language"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "acc-013",
+      "expected": "account",
+      "predicted": "account",
+      "passed": true,
+      "summary": "Customer reports unauthorized login from another country and requests account security measures.",
+      "summary_score": 5,
+      "latency_ms": 236.64314699999522,
+      "prompt_tokens": 551,
+      "completion_tokens": 38,
+      "judge_tokens": 271,
+      "difficulty": "easy",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "acc-014",
+      "expected": "account",
+      "predicted": "account",
+      "passed": true,
+      "summary": "Customer needs to transfer ownership of the organization account after previous admin left, to manage users and settings.",
+      "summary_score": 5,
+      "latency_ms": 183.7437939998381,
+      "prompt_tokens": 588,
+      "completion_tokens": 46,
+      "judge_tokens": 339,
+      "difficulty": "medium",
+      "tags": [
+        "long"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "acc-015",
+      "expected": "account",
+      "predicted": "account",
+      "passed": true,
+      "summary": "Customer wants instructions on enabling two‑factor authentication.",
+      "summary_score": 5,
+      "latency_ms": 112.22844299982171,
+      "prompt_tokens": 541,
+      "completion_tokens": 34,
+      "judge_tokens": 243,
+      "difficulty": "easy",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "acc-016",
+      "expected": "account",
+      "predicted": "account",
+      "passed": true,
+      "summary": "Customer cannot access their account because they forgot their password and asks how to reset it.",
+      "summary_score": 5,
+      "latency_ms": 166.50633599965659,
+      "prompt_tokens": 556,
+      "completion_tokens": 43,
+      "judge_tokens": 279,
+      "difficulty": "hard",
+      "tags": [
+        "mixed_language"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "acc-017",
+      "expected": "account",
+      "predicted": "account",
+      "passed": true,
+      "summary": "Customer requests merging of two accounts created with work and personal emails.",
+      "summary_score": 5,
+      "latency_ms": 244.38981799994508,
+      "prompt_tokens": 553,
+      "completion_tokens": 37,
+      "judge_tokens": 268,
+      "difficulty": "medium",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "acc-018",
+      "expected": "account",
+      "predicted": "account",
+      "passed": true,
+      "summary": "Customer requests account cancellation because they no longer use the service.",
+      "summary_score": 5,
+      "latency_ms": 147.0785619999333,
+      "prompt_tokens": 544,
+      "completion_tokens": 36,
+      "judge_tokens": 265,
+      "difficulty": "hard",
+      "tags": [
+        "ambiguous"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "acc-019",
+      "expected": "account",
+      "predicted": "account",
+      "passed": true,
+      "summary": "Customer wants to update profile picture but the option is missing from settings.",
+      "summary_score": 5,
+      "latency_ms": 196.30111700007546,
+      "prompt_tokens": 547,
+      "completion_tokens": 42,
+      "judge_tokens": 280,
+      "difficulty": "medium",
+      "tags": [
+        "ambiguous"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "acc-020",
+      "expected": "account",
+      "predicted": "account",
+      "passed": true,
+      "summary": "Customer has been locked out for three days and requests immediate account recovery.",
+      "summary_score": 4,
+      "latency_ms": 205.6527049999204,
+      "prompt_tokens": 550,
+      "completion_tokens": 36,
+      "judge_tokens": 315,
+      "difficulty": "medium",
+      "tags": [
+        "angry"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "gen-001",
+      "expected": "general",
+      "predicted": "general",
+      "passed": true,
+      "summary": "Customer inquires about support hours on weekends.",
+      "summary_score": 5,
+      "latency_ms": 259.08226299998205,
+      "prompt_tokens": 540,
+      "completion_tokens": 31,
+      "judge_tokens": 249,
+      "difficulty": "easy",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "gen-002",
+      "expected": "general",
+      "predicted": "general",
+      "passed": true,
+      "summary": "Customer inquires about having an office in Manila for a demo visit.",
+      "summary_score": 5,
+      "latency_ms": 143.0469259998972,
+      "prompt_tokens": 548,
+      "completion_tokens": 39,
+      "judge_tokens": 270,
+      "difficulty": "easy",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "gen-003",
+      "expected": "general",
+      "predicted": "general",
+      "passed": true,
+      "summary": "Customer compliments the new design and encourages the team.",
+      "summary_score": 5,
+      "latency_ms": 196.55672299995786,
+      "prompt_tokens": 546,
+      "completion_tokens": 37,
+      "judge_tokens": 246,
+      "difficulty": "easy",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "gen-004",
+      "expected": "general",
+      "predicted": "general",
+      "passed": true,
+      "summary": "Customer inquires about hiring frontend developers and the absence of a careers page.",
+      "summary_score": 5,
+      "latency_ms": 287.276176999967,
+      "prompt_tokens": 545,
+      "completion_tokens": 40,
+      "judge_tokens": 268,
+      "difficulty": "easy",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "gen-005",
+      "expected": "general",
+      "predicted": "general",
+      "passed": true,
+      "summary": "Customer wants to discuss a partnership and asks who to contact.",
+      "summary_score": 5,
+      "latency_ms": 179.99826499999472,
+      "prompt_tokens": 548,
+      "completion_tokens": 37,
+      "judge_tokens": 255,
+      "difficulty": "easy",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "gen-006",
+      "expected": "general",
+      "predicted": "general",
+      "passed": true,
+      "summary": "Customer inquires about a public roadmap and whether offline mode is planned.",
+      "summary_score": 5,
+      "latency_ms": 131.72510799995507,
+      "prompt_tokens": 547,
+      "completion_tokens": 40,
+      "judge_tokens": 262,
+      "difficulty": "medium",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "gen-007",
+      "expected": "general",
+      "predicted": "general",
+      "passed": true,
+      "summary": "Customer inquires about a community forum or Discord server for sharing templates.",
+      "summary_score": 5,
+      "latency_ms": 291.707845000019,
+      "prompt_tokens": 552,
+      "completion_tokens": 39,
+      "judge_tokens": 274,
+      "difficulty": "medium",
+      "tags": [
+        "typos"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "gen-008",
+      "expected": "general",
+      "predicted": "general",
+      "passed": true,
+      "summary": "Customer comments on the delayed dark mode feature, indicating a feature request or roadmap concern.",
+      "summary_score": 2,
+      "latency_ms": 319.04321100000743,
+      "prompt_tokens": 552,
+      "completion_tokens": 50,
+      "judge_tokens": 288,
+      "difficulty": "hard",
+      "tags": [
+        "sarcastic"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "gen-009",
+      "expected": "general",
+      "predicted": "general",
+      "passed": true,
+      "summary": "Customer is seeking assistance but message is unclear.",
+      "summary_score": 1,
+      "latency_ms": 324.8709360000248,
+      "prompt_tokens": 534,
+      "completion_tokens": 37,
+      "judge_tokens": 255,
+      "difficulty": "medium",
+      "tags": [
+        "short"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "gen-010",
+      "expected": "general",
+      "predicted": "general",
+      "passed": true,
+      "summary": "Customer inquires whether their data is stored in the EU for compliance purposes before signing up.",
+      "summary_score": 5,
+      "latency_ms": 302.8440739999496,
+      "prompt_tokens": 551,
+      "completion_tokens": 55,
+      "judge_tokens": 279,
+      "difficulty": "medium",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "gen-011",
+      "expected": "general",
+      "predicted": "general",
+      "passed": true,
+      "summary": "Customer requests answers to questions and a high‑resolution logo for a blog article about remote team tools.",
+      "summary_score": 5,
+      "latency_ms": 188.0264490000627,
+      "prompt_tokens": 588,
+      "completion_tokens": 45,
+      "judge_tokens": 360,
+      "difficulty": "medium",
+      "tags": [
+        "long"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "gen-012",
+      "expected": "general",
+      "predicted": "general",
+      "passed": true,
+      "summary": "Customer inquires if the app is available in German for their team in Berlin.",
+      "summary_score": 5,
+      "latency_ms": 358.14101500000106,
+      "prompt_tokens": 552,
+      "completion_tokens": 41,
+      "judge_tokens": 273,
+      "difficulty": "hard",
+      "tags": [
+        "mixed_language"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "gen-013",
+      "expected": "general",
+      "predicted": "general",
+      "passed": true,
+      "summary": "Customer requests tutorials to get started with the platform.",
+      "summary_score": 5,
+      "latency_ms": 267.5493130000177,
+      "prompt_tokens": 547,
+      "completion_tokens": 34,
+      "judge_tokens": 259,
+      "difficulty": "easy",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "gen-014",
+      "expected": "general",
+      "predicted": "general",
+      "passed": true,
+      "summary": "Customer inquires about the migration process from a competitor and whether there are any associated costs.",
+      "summary_score": 5,
+      "latency_ms": 340.6888699996671,
+      "prompt_tokens": 553,
+      "completion_tokens": 84,
+      "judge_tokens": 278,
+      "difficulty": "hard",
+      "tags": [
+        "ambiguous"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "gen-015",
+      "expected": "general",
+      "predicted": "general",
+      "passed": true,
+      "summary": "Customer inquires about the availability of a mobile app for tablets.",
+      "summary_score": 5,
+      "latency_ms": 288.68732199998703,
+      "prompt_tokens": 541,
+      "completion_tokens": 35,
+      "judge_tokens": 257,
+      "difficulty": "easy",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "gen-016",
+      "expected": "general",
+      "predicted": "general",
+      "passed": true,
+      "summary": "Customer expresses gratitude for Maria from support, praising her patience.",
+      "summary_score": 5,
+      "latency_ms": 205.95352200007255,
+      "prompt_tokens": 551,
+      "completion_tokens": 39,
+      "judge_tokens": 266,
+      "difficulty": "medium",
+      "tags": [
+        "polite"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "gen-017",
+      "expected": "general",
+      "predicted": "general",
+      "passed": true,
+      "summary": "Customer compliments the app and requests more export formats, specifically Markdown, asking about future plans.",
+      "summary_score": 5,
+      "latency_ms": 164.70048200017118,
+      "prompt_tokens": 552,
+      "completion_tokens": 46,
+      "judge_tokens": 277,
+      "difficulty": "hard",
+      "tags": [
+        "ambiguous"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "gen-018",
+      "expected": "general",
+      "predicted": "general",
+      "passed": true,
+      "summary": "Customer wants to locate the terms of service and privacy policy.",
+      "summary_score": 5,
+      "latency_ms": 124.87754499989023,
+      "prompt_tokens": 544,
+      "completion_tokens": 34,
+      "judge_tokens": 266,
+      "difficulty": "easy",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "gen-019",
+      "expected": "general",
+      "predicted": "general",
+      "passed": true,
+      "summary": "Customer inquires about the company's donations to open source projects and overall values.",
+      "summary_score": 5,
+      "latency_ms": 206.51008400000137,
+      "prompt_tokens": 547,
+      "completion_tokens": 40,
+      "judge_tokens": 269,
+      "difficulty": "medium",
+      "tags": [],
+      "error": null
+    },
+    {
+      "case_id": "gen-020",
+      "expected": "general",
+      "predicted": "general",
+      "passed": true,
+      "summary": "Customer expresses gratitude for assistance.",
+      "summary_score": 5,
+      "latency_ms": 126.162253000075,
+      "prompt_tokens": 540,
+      "completion_tokens": 49,
+      "judge_tokens": 246,
+      "difficulty": "hard",
+      "tags": [
+        "mixed_language",
+        "short"
+      ],
+      "error": null
+    }
+  ],
+  "summary": {
+    "n": 80,
+    "accuracy": 0.9625,
+    "mean_summary_score": 4.775,
+    "per_category": {
+      "billing": {
+        "correct": 20,
+        "total": 20
+      },
+      "technical": {
+        "correct": 17,
+        "total": 20
+      },
+      "account": {
+        "correct": 20,
+        "total": 20
+      },
+      "general": {
+        "correct": 20,
+        "total": 20
+      }
+    },
+    "per_difficulty": {
+      "easy": {
+        "correct": 29,
+        "total": 29
+      },
+      "hard": {
+        "correct": 16,
+        "total": 18
+      },
+      "medium": {
+        "correct": 32,
+        "total": 33
+      }
+    },
+    "latency_p50_ms": 249.9,
+    "latency_p95_ms": 342.7,
+    "total_prompt_tokens": 43704,
+    "total_completion_tokens": 3334,
+    "total_judge_tokens": 22268,
+    "errors": 1
+  }
+}

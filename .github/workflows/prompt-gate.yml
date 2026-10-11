@@ -1,0 +1,85 @@
+name: prompt-gate
+
+# CI for model behaviour: runs the golden-dataset eval on every PR that touches prompts,
+# comments the diff on the PR, and fails the check (blocking merge when this check is required)
+# on a critical regression.
+on:
+  pull_request:
+    paths:
+      - "prompts/**"
+      - "golden/**"
+      - "regresscheck.toml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: prompt-gate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    env:
+      # Mock provider unless an OPENAI_API_KEY secret exists (any OpenAI-compatible endpoint).
+      REGRESSCHECK_PROVIDER: ${{ secrets.OPENAI_API_KEY != '' && 'openai' || 'mock' }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      OPENAI_BASE_URL: ${{ vars.OPENAI_BASE_URL }}
+      MODEL: ${{ vars.MODEL }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      REPORT_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+      REGRESSCHECK_TRACK: ${{ github.base_ref || github.ref_name }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install .
+      - name: Restore run history (SQLite)
+        uses: actions/cache@v4
+        with:
+          path: .regresscheck
+          key: regresscheck-history-${{ github.run_id }}
+          restore-keys: regresscheck-history-
+      - name: Evaluate changed prompts
+        id: gate
+        env:
+          BASE_REF: ${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || 'HEAD~1' }}
+        run: |
+          set +e
+          scripts/prompt_gate.sh
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+      - name: Upload HTML reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: regresscheck-report
+          path: |
+            reports/
+            gate-out/
+      - name: Comment on the PR
+        if: github.event_name == 'pull_request' && always()
+        continue-on-error: true  # read-only token on fork PRs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          body_file=gate-out/comment.md
+          test -s "$body_file" || exit 0
+          existing=$(gh api "repos/$GITHUB_REPOSITORY/issues/$PR/comments" --paginate \
+            --jq '[.[] | select(.user.login == "github-actions[bot]" and (.body | contains("<!-- regresscheck -->")))][0].id // empty')
+          if [ -n "$existing" ]; then
+            gh api -X PATCH "repos/$GITHUB_REPOSITORY/issues/comments/$existing" -F body=@"$body_file" > /dev/null
+          else
+            gh api -X POST "repos/$GITHUB_REPOSITORY/issues/$PR/comments" -F body=@"$body_file" > /dev/null
+          fi
+      - name: Fail on critical regression
+        if: steps.gate.outputs.exit_code != '0'
+        run: |
+          echo "regresscheck exit code ${{ steps.gate.outputs.exit_code }} (2 = critical regression, 1 = error)"
+          exit 1

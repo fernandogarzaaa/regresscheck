@@ -42,12 +42,20 @@ and the drift detector fires. The per-run gate alone would have let accuracy sli
 
 ### Real model (Groq free tier, `openai/gpt-oss-20b`, `reasoning_effort=low`)
 
-Baseline run of the active prompt `v2` (80 cases, LLM-as-judge on the same endpoint):
+Committed baseline of the active prompt `v2` (80 cases, LLM-as-judge on the same endpoint):
 **96.2% accuracy (77/80)**, mean summary score **4.78/5**, p50 latency 250 ms, p95 343 ms
-(measured client-side, includes network), 47,038 tokens including the judge, 1 contract
-violation. Per category: billing 100%, technical 85%, account 100%, general 100%.
-Raw records: `results/groq/baselines/`. The repeat-run, `v3-bad` and `v1` comparisons are being
-recorded in `results/groq/`.
+(measured client-side, includes network), 47,038 prompt + completion tokens (plus 22,268 judge
+tokens). Per category: billing 100%, technical 85%, account 100%, general 100%. Of the three misses,
+two are misclassifications (`tec-010`, `tec-019`) and one (`tec-017`) is a case lost to an HTTP 429
+from Groq's per-minute token limit, so it counts as a failure and scores 1 on the summary.
+Raw record: `results/groq/baselines/openai__openai_gpt-oss-20b.json`. That baseline is the only
+real-model run committed to this repo.
+
+*Observation, not yet recorded as an artifact:* one run of `demo/prompts/v3-bad` against this
+baseline kept accuracy at about 97.5%, but mean summary score fell from 4.78 to 4.15 and the gate
+marked it **critical**. On a real model the trimmed prompt hurts summaries rather than
+classification, unlike the mock run above. Repeat runs of `v2` and `v3-bad` are pending Groq's
+free-tier daily limit; until they are committed, treat this as unverified.
 
 ### Test suite
 
@@ -303,8 +311,8 @@ Slack with a real local HTTP server, and the CLI end-to-end against the real gol
 - **Mock numbers are not model numbers.** The mock validates the pipeline (diffing, thresholds,
   drift, reports, CI gate). Only the Groq section above measures a real model.
 - **One real model, small sample.** Real-model results cover a single model (`openai/gpt-oss-20b` on
-  Groq's free tier). Run-to-run noise was measured with one repeat run, which is not enough to
-  set thresholds per model with confidence.
+  Groq's free tier), and only one run (the `v2` baseline) is committed. Run-to-run noise has not
+  been measured yet, so thresholds are not calibrated per model.
 - **The LLM judge is uncalibrated and self-grading.** In the Groq runs the same model writes and
   grades summaries, which invites self-preference bias, and no human ratings exist yet to calibrate
   the 1-5 scale. The lexical judge used with the mock is a crude proxy.
@@ -330,7 +338,7 @@ prompts/               versioned prompts (v1, v2 = active)
 golden/dataset.json    80 hand-labelled cases
 baselines/             committed baseline per provider + model
 demo/                  v3-bad prompt, drift prompt chain, generated demo output and RESULTS.md
-results/groq/          real-model runs (history.db, baselines, reports, PR-comment Markdown)
+results/groq/          real-model run config (groq.toml) and the committed Groq baseline
 scripts/               run_demo.py, prompt_gate.sh (used by the prompt-gate workflow)
 tests/                 pytest suite
 ```

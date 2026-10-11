@@ -1,10 +1,10 @@
-run 6271faa82bd5  prompt v1 (710a17a02fb1)  mock/mock-classifier-v1
+run 03c13849a242  prompt v1 (710a17a02fb1)  mock/mock-classifier-v1
   accuracy 66.2% (53/80)  summary 3.62/5  p50 343ms  p95 427ms  tokens 12886  errors 0
   per category: billing 75%  technical 25%  account 65%  general 100%
   per difficulty: easy 83%  hard 61%  medium 55%
-no baseline to compare against (previous); recorded run 6271faa82bd5 as the first point
+no baseline to compare against (previous); recorded run 03c13849a242 as the first point
 
-run faf2fd2710d7  prompt v2 (fd75c34b49d1)  mock/mock-classifier-v1
+run 58e98b65ea75  prompt v2 (fd75c34b49d1)  mock/mock-classifier-v1
   accuracy 87.5% (70/80)  summary 3.89/5  p50 388ms  p95 500ms  tokens 43494  errors 0
   per category: billing 95%  technical 80%  account 95%  general 80%
   per difficulty: easy 97%  hard 61%  medium 94%
@@ -12,7 +12,7 @@ WARN: 4 regression(s), 21 improvement(s); accuracy 66.2% -> 87.5% (+21.2%), summ
   - general accuracy dropped 20.0% (category warn > 10%)
   report: demo/out/v2-report.html
 
-run ad47582f2160  prompt v3-bad (ee81a9a5a392)  mock/mock-classifier-v1
+run 2dfce65b3df8  prompt v3-bad (ee81a9a5a392)  mock/mock-classifier-v1
   accuracy 77.5% (62/80)  summary 3.26/5  p50 332ms  p95 368ms  tokens 23986  errors 0
   per category: billing 100%  technical 25%  account 90%  general 95%
   per difficulty: easy 86%  hard 61%  medium 79%
@@ -22,90 +22,90 @@ CRITICAL: 12 regression(s), 4 improvement(s); accuracy 87.5% -> 77.5% (-10.0%), 
   - technical accuracy dropped 55.0% (category warn > 10%)
   report: demo/out/v3-bad-report.html
 
-run c848fb35783c  prompt v2 (fd75c34b49d1)  mock/mock-classifier-v1
+run dac9021c0764  prompt v2 (fd75c34b49d1)  mock/mock-classifier-v1
   accuracy 87.5% (70/80)  summary 3.89/5  p50 388ms  p95 500ms  tokens 43494  errors 0
   per category: billing 95%  technical 80%  account 95%  general 80%
   per difficulty: easy 97%  hard 61%  medium 94%
-no baseline to compare against (previous); recorded run c848fb35783c as the first point
+no baseline to compare against (previous); recorded run dac9021c0764 as the first point
 
-run 8f0b464570be  prompt v2 (fd75c34b49d1)  mock/mock-classifier-v1
-  accuracy 87.5% (70/80)  summary 3.89/5  p50 388ms  p95 500ms  tokens 43494  errors 0
-  per category: billing 95%  technical 80%  account 95%  general 80%
-  per difficulty: easy 97%  hard 61%  medium 94%
-PASS: 0 regression(s), 0 improvement(s); accuracy 87.5% -> 87.5% (+0.0%), summary 3.89 -> 3.89 (+0.00)
-  report: demo/out/drift-latest-report.html
-
-run b3d34cead261  prompt v2 (fd75c34b49d1)  mock/mock-classifier-v1
+run 569a629fecbf  prompt v2 (fd75c34b49d1)  mock/mock-classifier-v1
   accuracy 87.5% (70/80)  summary 3.89/5  p50 388ms  p95 500ms  tokens 43494  errors 0
   per category: billing 95%  technical 80%  account 95%  general 80%
   per difficulty: easy 97%  hard 61%  medium 94%
 PASS: 0 regression(s), 0 improvement(s); accuracy 87.5% -> 87.5% (+0.0%), summary 3.89 -> 3.89 (+0.00)
   report: demo/out/drift-latest-report.html
 
-run 04c78af1f952  prompt v2 (fd75c34b49d1)  mock/mock-classifier-v1
+run db35dcc89f1e  prompt v2 (fd75c34b49d1)  mock/mock-classifier-v1
   accuracy 87.5% (70/80)  summary 3.89/5  p50 388ms  p95 500ms  tokens 43494  errors 0
   per category: billing 95%  technical 80%  account 95%  general 80%
   per difficulty: easy 97%  hard 61%  medium 94%
 PASS: 0 regression(s), 0 improvement(s); accuracy 87.5% -> 87.5% (+0.0%), summary 3.89 -> 3.89 (+0.00)
   report: demo/out/drift-latest-report.html
 
-run ed1875a3b194  prompt v2 (fd75c34b49d1)  mock/mock-classifier-v1
+run 7e2ebe49cad6  prompt v2 (fd75c34b49d1)  mock/mock-classifier-v1
   accuracy 87.5% (70/80)  summary 3.89/5  p50 388ms  p95 500ms  tokens 43494  errors 0
   per category: billing 95%  technical 80%  account 95%  general 80%
   per difficulty: easy 97%  hard 61%  medium 94%
 PASS: 0 regression(s), 0 improvement(s); accuracy 87.5% -> 87.5% (+0.0%), summary 3.89 -> 3.89 (+0.00)
   report: demo/out/drift-latest-report.html
 
-run f8004da8ab50  prompt v2 (fd75c34b49d1)  mock/mock-classifier-v1
+run d93d7639c87f  prompt v2 (fd75c34b49d1)  mock/mock-classifier-v1
   accuracy 87.5% (70/80)  summary 3.89/5  p50 388ms  p95 500ms  tokens 43494  errors 0
   per category: billing 95%  technical 80%  account 95%  general 80%
   per difficulty: easy 97%  hard 61%  medium 94%
 PASS: 0 regression(s), 0 improvement(s); accuracy 87.5% -> 87.5% (+0.0%), summary 3.89 -> 3.89 (+0.00)
   report: demo/out/drift-latest-report.html
 
-run a3700b8e41ce  prompt v2 (fd75c34b49d1)  mock/mock-classifier-v1
+run 2c1679272ed6  prompt v2 (fd75c34b49d1)  mock/mock-classifier-v1
   accuracy 87.5% (70/80)  summary 3.89/5  p50 388ms  p95 500ms  tokens 43494  errors 0
   per category: billing 95%  technical 80%  account 95%  general 80%
   per difficulty: easy 97%  hard 61%  medium 94%
 PASS: 0 regression(s), 0 improvement(s); accuracy 87.5% -> 87.5% (+0.0%), summary 3.89 -> 3.89 (+0.00)
   report: demo/out/drift-latest-report.html
 
-run 6f826861a0db  prompt v2.d1 (b872e8c6d227)  mock/mock-classifier-v1
+run 3cf3f46e32cb  prompt v2 (fd75c34b49d1)  mock/mock-classifier-v1
+  accuracy 87.5% (70/80)  summary 3.89/5  p50 388ms  p95 500ms  tokens 43494  errors 0
+  per category: billing 95%  technical 80%  account 95%  general 80%
+  per difficulty: easy 97%  hard 61%  medium 94%
+PASS: 0 regression(s), 0 improvement(s); accuracy 87.5% -> 87.5% (+0.0%), summary 3.89 -> 3.89 (+0.00)
+  report: demo/out/drift-latest-report.html
+
+run f76a7e1b0121  prompt v2.d1 (b872e8c6d227)  mock/mock-classifier-v1
   accuracy 86.2% (69/80)  summary 3.89/5  p50 388ms  p95 500ms  tokens 43254  errors 0
   per category: billing 90%  technical 80%  account 95%  general 80%
   per difficulty: easy 97%  hard 61%  medium 91%
 PASS: 1 regression(s), 0 improvement(s); accuracy 87.5% -> 86.2% (-1.2%), summary 3.89 -> 3.89 (+0.00)
   report: demo/out/drift-latest-report.html
 
-run 73cb3ec82972  prompt v2.d2 (0f0f6324d9aa)  mock/mock-classifier-v1
+run 4b1c4ef3fec6  prompt v2.d2 (0f0f6324d9aa)  mock/mock-classifier-v1
   accuracy 85.0% (68/80)  summary 3.89/5  p50 388ms  p95 499ms  tokens 42933  errors 0
   per category: billing 90%  technical 75%  account 95%  general 80%
   per difficulty: easy 93%  hard 61%  medium 91%
 PASS: 1 regression(s), 0 improvement(s); accuracy 86.2% -> 85.0% (-1.2%), summary 3.89 -> 3.89 (+0.00)
   report: demo/out/drift-latest-report.html
 
-run ec8fb17d8748  prompt v2.d3 (443c6248dadc)  mock/mock-classifier-v1
+run c3313f1482e7  prompt v2.d3 (443c6248dadc)  mock/mock-classifier-v1
   accuracy 83.8% (67/80)  summary 3.89/5  p50 388ms  p95 499ms  tokens 42773  errors 0
   per category: billing 90%  technical 75%  account 95%  general 75%
   per difficulty: easy 90%  hard 61%  medium 91%
 PASS: 1 regression(s), 0 improvement(s); accuracy 85.0% -> 83.8% (-1.2%), summary 3.89 -> 3.89 (+0.00)
   report: demo/out/drift-latest-report.html
 
-run e45d4ede5544  prompt v2.d4 (7f642a6fc933)  mock/mock-classifier-v1
+run 6972f6cc3f4c  prompt v2.d4 (7f642a6fc933)  mock/mock-classifier-v1
   accuracy 82.5% (66/80)  summary 3.86/5  p50 388ms  p95 499ms  tokens 42601  errors 0
   per category: billing 90%  technical 70%  account 95%  general 75%
   per difficulty: easy 90%  hard 61%  medium 88%
 PASS: 1 regression(s), 0 improvement(s); accuracy 83.8% -> 82.5% (-1.2%), summary 3.89 -> 3.86 (-0.03)
   report: demo/out/drift-latest-report.html
 
-run f9fd974dcb62  prompt v2.d5 (50ad1bde4cc3)  mock/mock-classifier-v1
+run 6c9823fc0de4  prompt v2.d5 (50ad1bde4cc3)  mock/mock-classifier-v1
   accuracy 81.2% (65/80)  summary 3.86/5  p50 388ms  p95 499ms  tokens 42441  errors 0
   per category: billing 90%  technical 70%  account 90%  general 75%
   per difficulty: easy 90%  hard 61%  medium 85%
 PASS: 1 regression(s), 0 improvement(s); accuracy 82.5% -> 81.2% (-1.2%), summary 3.86 -> 3.86 (+0.00)
   report: demo/out/drift-latest-report.html
 
-run f71b0b4e1169  prompt v2.d6 (ad67fc718ceb)  mock/mock-classifier-v1
+run 9ab136b070c8  prompt v2.d6 (ad67fc718ceb)  mock/mock-classifier-v1
   accuracy 80.0% (64/80)  summary 3.86/5  p50 388ms  p95 499ms  tokens 42360  errors 0
   per category: billing 90%  technical 65%  account 90%  general 75%
   per difficulty: easy 90%  hard 61%  medium 82%
@@ -113,7 +113,7 @@ WARN: 1 regression(s), 0 improvement(s); accuracy 81.2% -> 80.0% (-1.2%), summar
   - slow drift: 7-run moving average 83.8% is 3.7% below its peak 87.5% (drift > 3%)
   report: demo/out/drift-latest-report.html
 
-run aa72cc1b67c8  prompt v2.d7 (b205cf3cfab7)  mock/mock-classifier-v1
+run 9492ab11ac76  prompt v2.d7 (b205cf3cfab7)  mock/mock-classifier-v1
   accuracy 78.8% (63/80)  summary 3.86/5  p50 388ms  p95 499ms  tokens 42199  errors 0
   per category: billing 90%  technical 60%  account 90%  general 75%
   per difficulty: easy 90%  hard 56%  medium 82%

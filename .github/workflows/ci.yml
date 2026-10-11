@@ -65,7 +65,12 @@ jobs:
           BASE: ${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || github.event.before }}
         run: |
           if [ -z "$BASE" ] || ! git cat-file -e "$BASE^{commit}" 2>/dev/null; then BASE=HEAD~1; fi
-          testteeth run --base "$BASE" --fail-under 85 --workers 2
+          if git cat-file -e "$BASE^{commit}" 2>/dev/null; then
+            testteeth run --base "$BASE" --fail-under 85 --workers 2
+          else
+            echo "No base commit (first push): grading every mutant."
+            testteeth run --fail-under 85 --workers 4
+          fi
 
   docker:
     runs-on: ubuntu-latest

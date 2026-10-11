@@ -36,6 +36,10 @@ The 7-run moving average falls to 83.8%, 3.7 pts under its 87.5% peak, at the si
 and the drift detector fires. The per-run gate alone would have let accuracy slide from
 87.5% to 78.8% without a single alert.
 
+![v3-bad diff report](docs/report-v3-bad.png)
+
+![slow-drift trend chart](docs/drift-trend.png)
+
 ### Real model (Groq free tier, `openai/gpt-oss-20b`, `reasoning_effort=low`)
 
 Baseline run of the active prompt `v2` (80 cases, LLM-as-judge on the same endpoint):

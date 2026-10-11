@@ -36,7 +36,7 @@ def trend_svg(points: list[HistoryPoint], moving: list[float | None], width: int
         parts.append(f'<line x1="{pad_l}" x2="{width - pad_r}" y1="{y(tick):.1f}" y2="{y(tick):.1f}" stroke="#eee"/>')
         parts.append(
             f'<text x="{pad_l - 6}" y="{y(tick) + 4:.1f}" font-size="11" text-anchor="end" fill="#666">'
-            f"{tick:.0%}</text>"
+            f"{round(tick * 100, 1):g}%</text>"
         )
     acc = " ".join(f"{x(i):.1f},{y(p.accuracy):.1f}" for i, p in enumerate(points))
     parts.append(f'<polyline fill="none" stroke="#0969da" stroke-width="2" points="{acc}"/>')

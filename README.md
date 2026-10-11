@@ -174,9 +174,13 @@ which is exactly the situation where a fixed business threshold is the better de
 - `.github/workflows/prompt-gate.yml` (PRs touching `prompts/`, `golden/` or `regresscheck.toml`,
   plus manual dispatch): `scripts/prompt_gate.sh` evaluates every changed prompt file (or the
   active prompt when only the dataset changed), posts/updates one PR comment, uploads reports,
-  restores and saves the SQLite history through `actions/cache` (so drift has a history to look at),
+  restores and saves the SQLite history through the Actions cache (so drift has a history to look at),
   and fails on critical. It uses the mock provider unless an `OPENAI_API_KEY` repository secret is
   set; `OPENAI_BASE_URL` and `MODEL` come from repository variables, `SLACK_WEBHOOK_URL` from a secret.
+  [PR #1](https://github.com/fernandogarzaaa/regresscheck/pull/1) is a live example: it adds a
+  trimmed `prompts/v3.yaml`, the gate comments a CRITICAL scorecard on the PR, and the check fails.
+  The SQLite history is saved with `actions/cache/save` under `if: always()`, so a failing gate
+  still records its run for drift tracking.
 
 ## Slack
 

@@ -41,7 +41,7 @@ jobs:
           cache: pip
       - run: pip install .
       - name: Restore run history (SQLite)
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: .regresscheck
           key: regresscheck-history-${{ github.run_id }}
@@ -54,6 +54,12 @@ jobs:
           set +e
           scripts/prompt_gate.sh
           echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+      - name: Save run history (also when the gate fails)
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .regresscheck
+          key: regresscheck-history-${{ github.run_id }}
       - name: Upload HTML reports
         if: always()
         uses: actions/upload-artifact@v4

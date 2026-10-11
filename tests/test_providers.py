@@ -480,3 +480,17 @@ def test_mock_latency_is_rounded_to_one_decimal_and_default_retries() -> None:
     assert out.latency_ms == round(120.0 + 0.25 + 9.0 * out.completion_tokens, 1)
     assert out.latency_ms * 10 == int(out.latency_ms * 10)
     assert OpenAICompatibleProvider("http://x", "k", "m").max_retries == 3
+
+
+def test_short_retry_after_never_undercuts_exponential_backoff(monkeypatch: pytest.MonkeyPatch) -> None:
+    sleeps: list[float] = []
+
+    async def fake_sleep(s: float) -> None:
+        sleeps.append(s)
+
+    monkeypatch.setattr("regresscheck.providers.asyncio.sleep", fake_sleep)
+    responses = iter([httpx.Response(429, headers={"retry-after": "0.1"})] * 3 + [httpx.Response(200, json=OK_BODY)])
+    asyncio.run(
+        _provider(httpx.MockTransport(lambda r: next(responses)), retries=4).complete([], temperature=0, max_tokens=1)
+    )
+    assert sleeps == [0.5, 1.0, 2.0]

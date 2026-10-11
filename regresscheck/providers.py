@@ -118,7 +118,7 @@ class OpenAICompatibleProvider:
                 last_error = f"HTTP {resp.status_code}: {resp.text[:200]}"
                 if resp.status_code not in (408, 429) and resp.status_code < 500:
                     break
-                delay = retry_after_seconds(resp.headers.get("retry-after"), default=delay)
+                delay = max(delay, retry_after_seconds(resp.headers.get("retry-after"), default=delay))
             if attempt + 1 < self.max_retries:
                 await asyncio.sleep(delay)
         raise ProviderError(last_error)

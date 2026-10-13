@@ -229,7 +229,7 @@ def cmd_history(args: argparse.Namespace, settings: Settings) -> int:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="regresscheck", description="CI for LLM prompt and model changes.")
     parser.add_argument("--version", action="version", version=f"regresscheck {__version__}")
-    parser.add_argument("--config", default="regresscheck.toml", help="settings file (default: regresscheck.toml)")
+    parser.add_argument("--config", default=None, help="settings file (default: regresscheck.toml, if present)")
     sub = parser.add_subparsers(dest="command", required=True)
 
     def eval_opts(p: argparse.ArgumentParser) -> None:
@@ -294,7 +294,9 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
-        settings = load_settings(args.config)
+        if args.config is not None and not Path(args.config).is_file():
+            raise ConfigError(f"config file not found: {args.config}")
+        settings = load_settings(args.config if args.config is not None else "regresscheck.toml")
         result: int = args.func(args, settings)
         return result
     except (ConfigError, LoadError, ProviderError) as exc:

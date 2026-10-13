@@ -148,3 +148,15 @@ def test_slack_alert_is_sent_on_critical(
     assert len(received) == 2
     assert "CRITICAL" in str(received[1]["text"])
     assert "https://ci.example/run/7" in json.dumps(received[1])
+
+
+def test_explicit_missing_config_is_an_error(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
+    assert main(["--config", str(tmp_path / "nope.toml"), "validate"]) == 1
+    assert "config file not found" in capsys.readouterr().err
+
+
+def test_malformed_config_toml_is_an_error(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
+    bad = tmp_path / "bad.toml"
+    bad.write_text("[x\n")
+    assert main(["--config", str(bad), "validate"]) == 1
+    assert "invalid TOML" in capsys.readouterr().err

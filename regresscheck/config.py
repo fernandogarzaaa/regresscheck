@@ -88,7 +88,10 @@ def load_settings(path: str | Path | None = "regresscheck.toml", env: dict[str, 
     data: dict[str, Any] = {}
     if path is not None and Path(path).is_file():
         with open(path, "rb") as fh:
-            data = tomllib.load(fh).get("regresscheck", {})
+            try:
+                data = tomllib.load(fh).get("regresscheck", {})
+            except tomllib.TOMLDecodeError as exc:
+                raise ConfigError(f"{path}: invalid TOML: {exc}") from None
 
     known_thresholds = {f.name for f in fields(Thresholds)}
     raw_thresholds = data.pop("thresholds", {})

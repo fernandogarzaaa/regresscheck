@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "regresscheck"
-version = "0.1.0"
+version = "0.1.1"
 description = "CI for LLM prompt and model changes: golden-dataset evals, run-to-run diffing, drift detection, HTML reports, Slack alerts and a GitHub Action gate."
 readme = "README.md"
 requires-python = ">=3.10"
